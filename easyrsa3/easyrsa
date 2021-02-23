@@ -875,14 +875,14 @@ Expected to find the request at: $req_in"
 	verify_file req "$req_in" || die "\
 The certificate request file is not in a valid X509 request format.
 File Path: $req_in"
+	
+	openssl_easyrsa req -verify -in "$req_in" || die "Invalid signature"
 
 	# Display the request subject in an easy-to-read format
 	# Confirm the user wishes to sign this request
 	confirm "Confirm request details: " "yes" "
 You are about to sign the following certificate.
-Please check over the details shown below for accuracy. Note that this request
-has not been cryptographically verified. Please be sure it came from a trusted
-source or that you have verified the request checksum with the sender.
+Please check over the details shown below for accuracy.
 
 Request subject, to be signed as a $crt_type certificate for $EASYRSA_CERT_EXPIRE days:
 
